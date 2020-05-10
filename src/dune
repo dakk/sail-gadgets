@@ -1,9 +1,7 @@
 (executable
  (name main)
- (libraries graphics unix)
- (modules ("main")))
-
-
+ (libraries graphics unix widgets)
+ (modules main))
 
 (env
   (dev
