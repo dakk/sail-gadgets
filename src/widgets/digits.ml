@@ -35,7 +35,7 @@ let draw_int x y h col n =
   )) ns
 ;;
 
-let draw_float x y h col n d =
+let draw_float x y h col d n =
   let ns = Printf.sprintf "%f" n in
   let rec ite s i p pd =
     let hasp = if not p && String.length s > i+1 && String.get s (i+1) = '.' then true else false in

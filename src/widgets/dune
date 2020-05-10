@@ -1,4 +1,4 @@
 (library
  (name widgets)
  (libraries graphics unix)
- (modules wind compass digits digits_box))
+ (modules style tab wind compass digits digits_box))
