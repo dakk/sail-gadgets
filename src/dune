@@ -1,0 +1,10 @@
+(executable
+ (name main)
+ (libraries graphics unix)
+ (modules ("main")))
+
+
+
+(env
+  (dev
+    (flags (:standard -warn-error -A))))
