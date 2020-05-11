@@ -1,0 +1,4 @@
+(library
+ (name util)
+ (libraries react lablgtk3)
+ (modules gadg ndata))

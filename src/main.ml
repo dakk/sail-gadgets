@@ -1,30 +1,23 @@
-open Graphics;;
-open Widgets;;
+let gadgets: ((module Util.Gadg.t) list) = [
+  (module Gadgs.Dashb)
+];;
 
-let width = 800;;
-let height = 600;;
+let fakedata = Util.Ndata.fake ();;
 
-let draw i () =
-  set_color Widgets.Style.bg;
-  fill_rect 0 0 width height;
-  set_color Widgets.Style.fg;
-  set_font Widgets.Style.font;
+let main () =
+  GMain.init () |> ignore;
+  let window = GWindow.window ~title:"Sail Gadgets" ~border_width:10 () in
+  window#connect#destroy ~callback:GMain.quit |> ignore;
+  let notebook = GPack.notebook ~packing:window#add () in
 
-  Widgets.Tab.draw 40 ["Dasboard"; "Start Line"; "MOB"; "Tack Meter"; "Wind"; "Track"] i;
-  Widgets.Digits_box.draw_float 300 300 40 Widgets.Style.fg 5 (125.33 +. float_of_int i *. 1.156);
+  List.iter (fun (module T: Util.Gadg.t) -> (
+    Printf.printf "Loading gadget %s\n%!" T.name;
+    T.create fakedata notebook
+  )) gadgets;
 
-  Widgets.Compass.draw (width / 2) (height / 2) 200 125.;
-;;
+  window#show ();
 
-let main () = 
-  open_graph @@ Printf.sprintf " %dx%d" width height;
+  (snd fakedata.hdg) 3.0;
+  GMain.main ()
 
-  let rec dr i =
-    draw i ();
-    Unix.sleep 1;
-    dr ((i+1) mod 6)
-  in dr 0;
-  ()
-;;
-
-main ();;
+let _ = main ()

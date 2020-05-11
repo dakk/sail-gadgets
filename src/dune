@@ -1,6 +1,6 @@
 (executable
  (name main)
- (libraries graphics unix widgets)
+ (libraries lablgtk3 react gadgs util)
  (modules main))
 
 (env

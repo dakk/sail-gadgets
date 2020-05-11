@@ -1,4 +1,0 @@
-(library
- (name mob)
- (libraries graphics)
- (modules mob))

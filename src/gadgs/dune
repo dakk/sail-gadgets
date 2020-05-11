@@ -1,3 +1,4 @@
 (library
  (name gadgs)
- (libraries graphics mob))
+ (libraries util)
+ (modules dashb))
