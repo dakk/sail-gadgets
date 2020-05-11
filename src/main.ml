@@ -11,7 +11,14 @@ let draw i () =
   set_font Widgets.Style.font;
 
   Widgets.Tab.draw 40 ["Dasboard"; "Start Line"; "MOB"; "Tack Meter"; "Wind"; "Track"] i;
-  Widgets.Digits_box.draw_float 300 300 40 Widgets.Style.fg 5 (125.33 +. float_of_int i *. 1.156);
+  moveto 10 (height-30);
+  draw_string "Speed (kts)";
+  Widgets.Digits_box.draw_float 30 (height - 60) 40 Widgets.Style.fg 5 (125.33 +. float_of_int i *. 1.156);
+  moveto 300 (height-30);
+  draw_string "Position";
+  moveto 300 (height-60);
+  draw_string "39.15489 N  8.35431 E";
+  
 
   Widgets.Compass.draw (width / 2) (height / 2) 200 125.;
 ;;
