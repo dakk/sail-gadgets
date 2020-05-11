@@ -9,6 +9,7 @@ let create (data: Util.Ndata.t) (nb:GPack.notebook) =
   (* button#connect#clicked ~callback:
     (fun () -> prerr_endline "Hello again - cool button 1 was pressed") |> ignore; *)
 
-  S.map (fun x -> label#set_text @@ Printf.sprintf "%f" x) (fst data.hdg) |> ignore;
-  ()
+  S.l2 (fun h s -> label#set_text @@ Printf.sprintf "HDG: %f; SPEED: %f" h s) (fst data.hdg) (fst data.sog) |> ignore;
+  
+  Some(GBin.frame ~label_xalign:(0.01) ~label:"Dashboard" ())
 ;;
