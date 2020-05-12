@@ -5,11 +5,11 @@ open Gobject.Data;;
 let name = "satview";;
 
 
-let cols = new GTree.column_list
-let prn = cols#add string
-let elev = cols#add string
-let azim = cols#add string
-let sndr = cols#add string
+let cols = new GTree.column_list;;
+let prn = cols#add string;;
+let elev = cols#add string;;
+let azim = cols#add string;;
+let sndr = cols#add string;;
 let store = GTree.tree_store cols;;
 
 let update_model (sl: Sentence.sat list) =

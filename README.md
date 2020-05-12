@@ -4,15 +4,20 @@ is organized in "Gadgets", which offers new functionality adding a tab to the ma
 The software automatically connects to serial NMEA data source to achieve data from GPS and
 other NMEA instruments.
 
-Sail-gadgets will be fully compatible with broadway, so every HTML5 enabled device in the boat
+Sail-gadgets will be compatible with broadway, so every HTML5 enabled device in the boat
 can access the software interface.
+
+
+## Data sources
+At the moment the datasource is the hardcoded /dev/ttyACM0; we will implement a customizable and
+multisource feature soon.
 
 
 ## Planned gadgets
 
-- dashboard: shows current position, speed, heading
-- wind: shows wind indicator with true / apparent speed and direction
+- dashboard: shows current position, speed, heading, tripdist, compass
 - satview: shows current connected gps satellites
+- wind: shows wind indicator with true / apparent speed and direction
 - radar: shows AIS and Radar targets in range
 - mob: allows to drop a marker in the current position, and drive you to that point
 - startline: helper for regatta start
@@ -33,7 +38,7 @@ module type t = sig
 end
 ```
 
-The create function receives a collection of (react) nmea data signals (Ndata.t), the main notebook (where it
+The create function receives a record of (react) nmea data signals (Ndata.t), the main notebook (where it
 appends one or more pages) and returns an optional frame for gadget settings.
 
 
