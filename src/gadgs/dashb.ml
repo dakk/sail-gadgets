@@ -5,7 +5,7 @@ let name = "dashboard";;
 let create (data: Util.Ndata.t) (nb:GPack.notebook) =
   let tab_label = GMisc.label ~text:"Dashboard" () in
 
-  let box = GPack.hbox ~spacing:0 ~packing:(fun w -> ignore (nb#append_page ~tab_label:(tab_label#coerce) w)) () in
+  let box = GPack.vbox ~spacing:0 ~packing:(fun w -> ignore (nb#append_page ~tab_label:(tab_label#coerce) w)) () in
 
   let label_speed = GMisc.label ~text:"Speed" ~packing:(fun w -> box#add w) () in
   let label_hdg = GMisc.label ~text:"HDG" ~packing:(fun w -> box#add w) () in

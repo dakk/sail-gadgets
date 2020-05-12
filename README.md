@@ -7,6 +7,18 @@ other NMEA instruments.
 Sail-gadgets will be compatible with broadway, so every HTML5 enabled device in the boat
 can access the software interface.
 
+![Broadway](https://raw.githubusercontent.com/dakk/sail-gadgets/master/media/broadway.jpg)
+
+## Build and start
+
+```make``
+
+or using broadway:
+
+```broadwayd :5 & GDK_BACKEND=broadway BROADWAY_DISPLAY=:5 make```
+
+then connect to: http://127.0.0.1:8085/
+
 
 ## Data sources
 At the moment the datasource is the hardcoded /dev/ttyACM0; we will implement a customizable and
