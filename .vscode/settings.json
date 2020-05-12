@@ -1,0 +1,6 @@
+{
+	"ocaml.sandbox": {
+		"switch": "default",
+		"kind": "opam"
+	}
+}

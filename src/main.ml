@@ -2,7 +2,7 @@ let gadgets: ((module Util.Gadg.t) list) = [
   (module Gadgs.Dashb)
 ];;
 
-let fakedata = Util.Ndata.fake ();;
+let data = Util.Ndata.empty ();;
 
 let settings_general () =
   let b = GBin.frame ~label_xalign:(0.01) ~label:"General" () in
@@ -13,7 +13,7 @@ let settings_general () =
 
 let main () =
   GMain.init () |> ignore;
-  let window = GWindow.window ~width:800 ~height:600 ~title:"Sail Gadgets" ~border_width:10 () in
+  let window = GWindow.window ~width:500 ~height:200 ~title:"Sail Gadgets" ~border_width:10 () in
   window#connect#destroy ~callback:GMain.quit |> ignore;
 
   let mbox = GPack.vbox ~spacing:0 () in
@@ -26,7 +26,7 @@ let main () =
   (* create gadgets *)
   let settings = List.map (fun (module T: Util.Gadg.t) -> (
     Printf.printf "Loading gadget %s\n%!" T.name;
-    T.create fakedata notebook
+    T.create data notebook
   )) gadgets in
 
   (* create settings page *)
@@ -45,8 +45,9 @@ let main () =
 
   window#show ();
 
-  (snd fakedata.hdg) 3.0;
+  Thread.create Util.Ndata.polling data |> ignore;
 
   GMain.main ()
+;;
 
 let _ = main ()

@@ -1,6 +1,7 @@
 EXCLUDE_QUERY_DIR
 B /home/dakk/.opam/default/lib/cairo2
 B /home/dakk/.opam/default/lib/lablgtk3
+B /home/dakk/.opam/default/lib/nmea
 B /home/dakk/.opam/default/lib/react
 B /usr/lib/ocaml
 B /usr/lib/ocaml/threads
@@ -8,6 +9,7 @@ B ../../_build/default/src/gadgs/.gadgs.objs/byte
 B ../../_build/default/src/util/.util.objs/byte
 S /home/dakk/.opam/default/lib/cairo2
 S /home/dakk/.opam/default/lib/lablgtk3
+S /home/dakk/.opam/default/lib/nmea
 S /home/dakk/.opam/default/lib/react
 S /usr/lib/ocaml
 S /usr/lib/ocaml/threads

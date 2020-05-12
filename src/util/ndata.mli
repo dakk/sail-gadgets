@@ -1,12 +1,14 @@
 open React
-(* open Nmea *)
+open Nmea
 
 type t = {
-  (* gps: Coord.t signal * (?step:step -> Coord.t -> unit); *)
+  ll: Coord.t signal * (?step:step -> Coord.t -> unit);
   hdg: float signal * (?step:step -> float -> unit); 
   sog: float signal * (?step:step -> float -> unit); 
 }
 
-val fake : unit -> t
+val empty : unit -> t
 
 val detect_sources : unit -> string list
+
+val polling : t -> unit
