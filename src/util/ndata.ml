@@ -5,12 +5,14 @@ type t = {
   ll: Coord.t signal * (?step:step -> Coord.t -> unit);
   hdg: float signal * (?step:step -> float -> unit); 
   sog: float signal * (?step:step -> float -> unit); 
+  sats: Sentence.sat list signal * (?step:step -> Sentence.sat list -> unit); 
 }
 
 let empty () = {
   ll= S.create @@ ((0.0, Coord.N), (0.0, Coord.W));
   hdg= S.create 0.0;
   sog= S.create 0.0;
+  sats= S.create [];
 };;
 
 let detect_sources () =
@@ -26,23 +28,27 @@ let rec polling data =
         (match s with
         | None -> ()
         | Some(Sentence.GPRMC (m)) -> (
-            Printf.printf "GPRMC()\n%!";
+            (* Printf.printf "GPRMC()\n%!"; *)
             (snd data.hdg) m.cmg;
             (snd data.sog) m.sog;
             (snd data.ll) m.coord;
         )
         | Some(Sentence.GPGLL (m)) -> (
-            Printf.printf "GPGLL()\n%!";
+            (* Printf.printf "GPGLL()\n%!"; *)
             (snd data.ll) m.coord;
         )
         | Some(Sentence.GPGGA (m)) -> (
-            Printf.printf "GPGGA()\n%!";
+            (* Printf.printf "GPGGA()\n%!"; *)
             (snd data.ll) m.coord;
+        )
+        | Some(Sentence.GPGSV (m)) -> (
+            (* Printf.printf "GPGSV(%d,%d)\n%!" m.msg_n m.msg_i; *)
+            let sl = if m.msg_i = 1 then m.sats else m.sats @ S.value (fst data.sats) in
+            (snd data.sats) sl
         )
         | Some (m) -> (
             Printf.printf "Not handled: %s\n%!" @@ Sentence.to_string m;
         ));
-        Thread.delay 1.0;
         p ()			
     in
     p ()

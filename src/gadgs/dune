@@ -1,4 +1,4 @@
 (library
  (name gadgs)
  (libraries util)
- (modules dashb))
+ (modules dashb satview))

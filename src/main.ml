@@ -1,5 +1,6 @@
 let gadgets: ((module Util.Gadg.t) list) = [
-  (module Gadgs.Dashb)
+	(module Gadgs.Dashb);
+	(module Gadgs.Satview)
 ];;
 
 let data = Util.Ndata.empty ();;
@@ -13,7 +14,7 @@ let settings_general () =
 
 let main () =
   GMain.init () |> ignore;
-  let window = GWindow.window ~width:500 ~height:200 ~title:"Sail Gadgets" ~border_width:10 () in
+  let window = GWindow.window ~width:500 ~height:300 ~title:"Sail Gadgets" ~border_width:10 () in
   window#connect#destroy ~callback:GMain.quit |> ignore;
 
   let mbox = GPack.vbox ~spacing:0 () in
