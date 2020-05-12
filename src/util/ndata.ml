@@ -27,21 +27,21 @@ let rec polling data =
         let s = Parse.next is in
         (match s with
         | None -> ()
-        | Some(Sentence.GPRMC (m)) -> (
+        | Some(Sentence.RMC (m)) -> (
             (* Printf.printf "GPRMC()\n%!"; *)
             (snd data.hdg) m.cmg;
             (snd data.sog) m.sog;
             (snd data.ll) m.coord;
         )
-        | Some(Sentence.GPGLL (m)) -> (
+        | Some(Sentence.GLL (m)) -> (
             (* Printf.printf "GPGLL()\n%!"; *)
             (snd data.ll) m.coord;
         )
-        | Some(Sentence.GPGGA (m)) -> (
+        | Some(Sentence.GGA (m)) -> (
             (* Printf.printf "GPGGA()\n%!"; *)
             (snd data.ll) m.coord;
         )
-        | Some(Sentence.GPGSV (m)) -> (
+        | Some(Sentence.GSV (m)) -> (
             (* Printf.printf "GPGSV(%d,%d)\n%!" m.msg_n m.msg_i; *)
             let sl = if m.msg_i = 1 then m.sats else m.sats @ S.value (fst data.sats) in
             (snd data.sats) sl
