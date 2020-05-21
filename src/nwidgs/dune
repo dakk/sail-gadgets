@@ -1,0 +1,4 @@
+(library
+ (name nwidgs)
+ (libraries lablgtk3)
+ (modules compass))

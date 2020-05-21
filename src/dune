@@ -1,6 +1,6 @@
 (executable
  (name main)
- (libraries lablgtk3 react gadgs util)
+ (libraries lablgtk3 react gadgs util nwidgs)
  (modules main))
 
 (env
