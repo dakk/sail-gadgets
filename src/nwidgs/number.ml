@@ -3,15 +3,20 @@ open Cairo;;
 let pi2 = 8. *. atan 1.;;
 let dtor d =  (d -. 90.) *. (3.14 /. 180.);;
 
-class compass_widget ?packing ?show () =
+class number_widget ?packing ?show () =
   let da = GMisc.drawing_area ?packing ?show () in
   object (self)
     inherit GObj.widget da#as_widget
 
-    val mutable hdg = 0.0
+    val mutable value = ""
+    val mutable title = ""
 
-    method set_heading h =
-      hdg <- h;
+    method set_title t =
+      title <- t;
+      self#misc#queue_draw ()
+
+    method set_value v =
+      value <- v;
       self#misc#queue_draw ()
 
     method draw cr =
@@ -19,17 +24,16 @@ class compass_widget ?packing ?show () =
       let width = float allocation.Gtk.width in
       let height = float allocation.Gtk.height in
 
-      let r = 0.45 *. width in
-      set_line_width cr 7.0;
       set_source_rgba cr 0.9 (165. /. 255.) 0. 0.9;
-      arc cr (width /. 2.0) (height /. 2.0) ~r ~a1:0. ~a2:pi2;
-      stroke cr;
-      set_source_rgba cr 0.9 0. 0. 0.9;
-      arc cr (width /. 2.0) (height /. 2.0) ~r ~a1:(dtor @@ hdg -. 3.) ~a2:(dtor @@ hdg +. 3.);
-      stroke cr;
-      move_to cr (width /. 4.0 +. width /. 7.0) (height /. 3.0);
+      move_to cr 100. 100.;
       set_font_size cr 24.;
-      show_text cr (Printf.sprintf "%.2f°" hdg);
+      show_text cr title;
+      stroke cr;
+
+      set_source_rgba cr 0.9 (165. /. 255.) 0. 0.9;
+      move_to cr 100. 100.;
+      set_font_size cr 24.;
+      show_text cr value;
       stroke cr;
       
       true
