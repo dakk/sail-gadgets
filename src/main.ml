@@ -14,7 +14,7 @@ let settings_general () =
 
 let main () =
   GMain.init () |> ignore;
-  let window = GWindow.window ~width:400 ~height:400 ~title:"Sail Gadgets" ~border_width:10 () in
+  let window = GWindow.window ~width:800 ~height:400 ~title:"Sail Gadgets" ~border_width:10 () in
   window#connect#destroy ~callback:GMain.quit |> ignore;
 
   let mbox = GPack.vbox ~spacing:0 () in
